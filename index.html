@@ -18,7 +18,7 @@
     data-cmp-purposes="1,3,4" data-cmp-purposes-li="2,7,9,10"
     data-cmp-fallback-src="https://pagead2.googlesyndication.com/tag/js/gpt.js" data-cmp-fallback-vendor="755"
     data-cmp-fallback-purposes-li="2,7,9,10"></script>
-
+    <script type='text/javascript' async src='https://prebid.reworldmediafactory.com/pbutils/prebid_utils.js'></script>
   <!-- END - REWORLD -->
 
   <!-- MOBILE CHECK -->
@@ -35,6 +35,11 @@
     window.googletag = window.googletag || {
       cmd: []
     };
+    var reworldAd = reworldAd || {};
+    reworldAd.que = reworldAd.que || [];
+    var reworldAdUtils = reworldAdUtils || {};
+    reworldAdUtils.que = reworldAdUtils.que || [];
+
     googletag.cmd.push(function () {
 
       if (is_mobile) {
@@ -54,42 +59,7 @@
           .setTargeting("pos", "101")
           .addService(googletag.pubads());
 
-        googletag
-          .defineSlot(
-            "/46980923/rencontre-ados-web",
-            [
-              [300, 250],
-              [300, 600],
-              [336, 280],
-              [320, 50],
-              [320, 100],
-              [300, 50],
-              [300, 100],
-            ],
-            "div-gpt-ad-mpu_bas"
-          )
-          .setTargeting("pos", "103")
-          .addService(googletag.pubads());
-
       } else {
-        googletag
-          .defineSlot(
-            "/46980923/rencontre-ados-web",
-            [
-              [728, 90],
-              [970, 90],
-              [970, 150],
-              [970, 250],
-              [1000, 90],
-              [1000, 200],
-              [1000, 250],
-              [1000, 300],
-            ],
-            "div-gpt-ad-mpu_bas"
-          )
-          .setTargeting("pos", "3")
-          .addService(googletag.pubads());
-
         googletag
           .defineSlot(
             "/46980923/rencontre-ados-web",
@@ -136,10 +106,14 @@
 
       googletag.enableServices();
 
-      if (typeof (reworldAd) != 'undefined')
+      reworldAd.que.push(function () {
         reworldAd.refresh();
-      else
-        googletag.pubads().refresh();
+        reworldAdUtils.que.push(function () {
+          reworldAdUtils.setPrebidUtilsConfig({
+            adUnit: "/46980923/rencontre-ados-web"
+          })
+        });
+      })
 
     });
   </script>
@@ -150,7 +124,7 @@
   <script async
     src="https://cdn.avantisvideo.com/avm/js/video-loader.js?id=37a16c48-87e3-4341-b9ab-c7c9469fbf98&tagId=83"
     id="avantisJS"> </script>
-<!-- END - AVANTIS VIDEO -->
+  <!-- END - AVANTIS VIDEO -->
 </head>
 
 <body>
@@ -177,13 +151,7 @@
   </div>
 
   <!-- FOOTER ADS --->
-  <div id="div-gpt-ad-mpu_bas">
-    <script>
-      googletag.cmd.push(function () {
-        googletag.display('div-gpt-ad-mpu_bas');
-      });
-    </script>
-  </div>
+  <div id="div-gpt-ad-mpu_bas" data-position="3" class="lazyload-rwad"></div>
 
 </body>
 
